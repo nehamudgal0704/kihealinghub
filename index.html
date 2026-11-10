@@ -145,6 +145,7 @@
     .confirmation { margin-top: 16px; padding: 13px; border: 1px solid #bdcdb9; background: var(--leaf-pale); color: var(--leaf-dark); font-size: 12px; line-height: 1.6; }
     .confirmation[hidden] { display: none; }
     .confirmation strong { display: block; margin-bottom: 2px; }
+    .confirmation.is-error { border-color: #dfb5a9; background: #f7e9e4; color: #813f30; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
     @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
@@ -348,17 +349,18 @@
         <div><h2 id="modal-title">Start a conversation</h2><p id="modal-description">Tell us a little about the session you have in mind.</p></div>
         <button class="icon-button" id="modal-close" type="button" aria-label="Close booking form">×</button>
       </div>
-      <form id="booking-form">
+      <form id="booking-form" action="https://formspree.io/f/mwllgqoq" method="POST">
+        <input type="hidden" name="_subject" value="New Ki Healing Hub session request">
         <div class="form-grid">
           <div class="field full"><label for="service">I’m interested in</label><select id="service" name="service"><option>A first conversation</option><option>Mindful yoga</option><option>Reiki-inspired care</option><option>Tarot reflection</option></select></div>
           <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
           <div class="field full"><label for="message">Anything you’d like us to know <span style="font-weight:400;text-transform:none">(optional)</span></label><textarea id="message" name="message" placeholder="Questions, access needs, or a good time to reach you"></textarea></div>
         </div>
-        <div class="confirmation" id="confirmation" role="status" hidden><strong>Your request is ready.</strong>This demo form does not send or store information yet. Connect it to an email or booking service to receive requests.</div>
+        <div class="confirmation" id="confirmation" role="status" hidden><strong id="confirmation-title"></strong><span id="confirmation-message"></span></div>
         <div class="form-actions">
           <button class="button button-outline" id="modal-cancel" type="button">Cancel</button>
-          <button class="button" type="submit">Review request</button>
+          <button class="button" type="submit">Send request</button>
         </div>
       </form>
     </section>
@@ -437,11 +439,17 @@
     const modal = document.getElementById('booking-modal');
     const form = document.getElementById('booking-form');
     const serviceSelect = document.getElementById('service');
+    const confirmation = document.getElementById('confirmation');
+    const confirmationTitle = document.getElementById('confirmation-title');
+    const confirmationMessage = document.getElementById('confirmation-message');
+    const submitButton = form.querySelector('button[type="submit"]');
+    let isSubmitting = false;
     let previousFocus = null;
     function openModal(service) {
       previousFocus = document.activeElement;
       serviceSelect.value = [...serviceSelect.options].some((option) => option.value === service) ? service : 'A first conversation';
-      document.getElementById('confirmation').hidden = true;
+      confirmation.hidden = true;
+      confirmation.classList.remove('is-error');
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
       document.getElementById('modal-close').focus();
@@ -456,10 +464,36 @@
     document.getElementById('modal-cancel').addEventListener('click', closeModal);
     modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.hidden) closeModal(); });
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
-      document.getElementById('confirmation').hidden = false;
+      if (isSubmitting || !form.reportValidity()) return;
+      isSubmitting = true;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      confirmation.hidden = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error('Form submission failed');
+        confirmationTitle.textContent = 'Request sent.';
+        confirmationMessage.textContent = 'Thank you. We’ll be in touch soon.';
+        confirmation.classList.remove('is-error');
+        confirmation.setAttribute('role', 'status');
+      } catch {
+        confirmationTitle.textContent = 'We couldn’t send your request.';
+        confirmationMessage.textContent = 'Please check your connection and try again.';
+        confirmation.classList.add('is-error');
+        confirmation.setAttribute('role', 'alert');
+      } finally {
+        confirmation.hidden = false;
+        isSubmitting = false;
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send request';
+      }
     });
 
     const menuToggle = document.getElementById('menu-toggle');
