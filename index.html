@@ -51,6 +51,9 @@
     .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-links a { color: #536157; font-size: 12px; text-decoration: none; }
     .nav-links a:hover { color: var(--clay); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .sound-quick { min-height: 39px; padding: 0 11px; border: 1px solid #bdc9ba; border-radius: 999px; background: transparent; color: var(--leaf-dark); font-size: 10px; cursor: pointer; }
+    .sound-quick[aria-pressed="true"] { border-color: var(--sun); background: #f6edda; }
     .button { min-height: 43px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 19px; border: 1px solid var(--leaf); border-radius: 4px; background: var(--leaf); color: white; font-size: 12px; font-weight: 700; text-decoration: none; cursor: pointer; transition: background .2s, transform .2s; }
     .button:hover { background: var(--leaf-dark); transform: translateY(-1px); }
     .button-outline { border-color: #9aa99b; background: transparent; color: var(--leaf-dark); }
@@ -109,6 +112,13 @@
     .offer p { margin: 0 0 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
     .text-link { margin-top: auto; padding: 0 0 4px; border: 0; border-bottom: 1px solid #9aab9a; background: transparent; color: var(--leaf-dark); font-size: 11px; font-weight: 700; cursor: pointer; }
     .text-link:hover { color: var(--clay); border-color: var(--clay); }
+    .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .philosophy-card { padding: 23px; }
+    .philosophy-card h3 { margin: 13px 0 7px; font-family: var(--serif); font-size: 23px; font-weight: 400; }
+    .philosophy-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.75; }
+    .affirmation { padding: 35px; text-align: center; }
+    .affirmation blockquote { max-width: 760px; margin: 12px auto; color: var(--leaf-dark); font-family: var(--serif); font-size: 30px; font-style: italic; line-height: 1.25; }
+    .affirmation cite { color: var(--muted); font-size: 9px; font-style: normal; letter-spacing: 1px; text-transform: uppercase; }
 
     .sound-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 18px; }
     .track-list { display: grid; align-content: center; gap: 8px; }
@@ -199,7 +209,9 @@
       .nav { min-height: 66px; }
       .brand-mark { width: 35px; height: 35px; }
       .brand-name { font-size: 19px; }
-      .nav > .button { display: none; }
+      .nav-actions > .button { display: none; }
+      .sound-quick { width: 40px; padding: 0; overflow: hidden; font-size: 0; }
+      .sound-quick::before { content: "♫"; font-size: 16px; }
       .menu-toggle { display: grid; place-items: center; }
       .nav-links { position: absolute; top: 65px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 7px 18px 14px; border-bottom: 1px solid var(--line); background: var(--paper); }
       .nav-links.is-open { display: flex; }
@@ -225,6 +237,7 @@
       .mode { padding-inline: 8px; font-size: 10px; }
       .breath-orbit { width: 208px; }
       .offer-grid { grid-template-columns: 1fr; }
+      .philosophy-grid { grid-template-columns: 1fr; }
       .offer, .offer + .offer { min-height: 0; padding: 24px 0; border-right: 0; border-bottom: 1px solid var(--line); }
       .offer:last-child { border-bottom: 0; }
       .offer h3 { margin-top: 11px; }
@@ -234,6 +247,8 @@
       .footer-row { align-items: flex-start; flex-direction: column; }
       .form-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
+      .affirmation { padding: 25px 18px; }
+      .affirmation blockquote { font-size: 25px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -252,10 +267,14 @@
         <a href="#soundscapes">Harmonics</a>
         <a href="#yoga">Yoga</a>
         <a href="#meditation">Meditation</a>
-        <a href="#sessions">Sessions</a>
+        <a href="#services">Ki Modalities</a>
+        <a href="#philosophy">Philosophy</a>
         <a href="#about">Our approach</a>
       </nav>
-      <button class="button" type="button" data-book="A first conversation">Book a conversation</button>
+      <div class="nav-actions">
+        <button class="sound-quick" id="quick-sound" type="button" aria-pressed="false" title="Toggle ambient sound">Sound: Off</button>
+        <button class="button" type="button" data-book="General Ki Balancing">Book session</button>
+      </div>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-navigation">☰</button>
     </div>
   </header>
@@ -265,14 +284,14 @@
       <div class="wrap">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">A gentler way back to yourself</span>
-            <h1 class="serif">Make room to <em>feel well.</em></h1>
-            <p>Find a little more space in your day through mindful movement, Reiki-inspired care, and thoughtful tarot reflection. Come as you are; begin where you are.</p>
+            <span class="eyebrow">Universal life force energy · Ki · Qi · Prana</span>
+            <h1 class="serif">Awaken and align your <em>vital energy</em> with Ki.</h1>
+            <p>Welcome to Ki Healing Hub. Explore Usui Reiki traditions, mindful movement, sound, and nervous-system-aware practices to make space for rest and reflection.</p>
             <div class="hero-actions">
               <a class="button" href="#breathwork">Take a breath <span aria-hidden="true">↗</span></a>
-              <a class="button button-outline" href="#sessions">Explore sessions</a>
+              <a class="button button-outline" href="#services">Explore sessions</a>
             </div>
-            <div class="hero-caption"><span class="caption-line"></span> Grounded practices for everyday life</div>
+            <div class="hero-caption"><span class="caption-line"></span> Breath, mindful movement, and one-to-one sessions</div>
           </div>
           <div class="hero-image">
             <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=85" alt="A person sitting quietly in meditation beside a sunlit window" fetchpriority="high">
@@ -280,9 +299,9 @@
           </div>
         </div>
         <div class="principles" aria-label="Our approach">
-          <div class="principle"><strong>Move gently</strong><span>Yoga and breath, at your pace</span></div>
-          <div class="principle"><strong>Listen inward</strong><span>Space for reflection and intention</span></div>
-          <div class="principle"><strong>Feel supported</strong><span>One-to-one, welcoming sessions</span></div>
+          <div class="principle"><strong>氣 (Ki)</strong><span>Life-force tradition</span></div>
+          <div class="principle"><strong>432 Hz</strong><span>Synthesized soundscapes</span></div>
+          <div class="principle"><strong>1-on-1</strong><span>Personal sessions</span></div>
         </div>
       </div>
     </section>
@@ -293,7 +312,7 @@
           <div class="mode-row" role="group" aria-label="Breathing pattern">
             <button class="mode" type="button" data-pattern="steady" aria-pressed="true">Steady 5–5</button>
             <button class="mode" type="button" data-pattern="box" aria-pressed="false">Box 4–4–4–4</button>
-            <button class="mode" type="button" data-pattern="ease" aria-pressed="false">Ease 4–6</button>
+            <button class="mode" type="button" data-pattern="ease" aria-pressed="false">Deep Ki Calm 4–7–8</button>
           </div>
           <div class="breath-visual" aria-live="polite">
             <div class="breath-orbit" id="breath-orbit" aria-hidden="true"></div>
@@ -338,6 +357,21 @@
               <label class="volume-control" for="sound-volume">Volume <input id="sound-volume" type="range" min="0" max="0.35" step="0.01" value="0.12"><span id="volume-label">34%</span></label>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="philosophy">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">The Principles of Ki</span>
+          <h2 class="serif">Understanding your vital energy</h2>
+          <p>In Japanese traditions, Ki is understood as vital energy, with related concepts found in Chinese Qi and Sanskrit Prana. These practices offer ways to focus attention, movement, and breath.</p>
+        </div>
+        <div class="philosophy-grid">
+          <article class="philosophy-card panel"><span class="eyebrow">Center</span><h3>The Hara / Tanden</h3><p>Often described as a center below the navel, the tanden is a focus in some Japanese movement and meditation practices. Gentle attention here can support a grounded practice.</p></article>
+          <article class="philosophy-card panel"><span class="eyebrow">Tradition</span><h3>Meridian Flow</h3><p>Traditional systems describe pathways through which Ki flows. We approach these ideas as part of a cultural wellness practice, alongside comfortable movement and reflection.</p></article>
+          <article class="philosophy-card panel"><span class="eyebrow">Practice</span><h3>Reiki Integration</h3><p>Reiki is a complementary practice rooted in Japanese tradition. Sessions are offered for relaxation and reflection, not as a substitute for medical or mental health care.</p></article>
         </div>
       </div>
     </section>
@@ -405,7 +439,7 @@
       </div>
     </section>
 
-    <section class="section" id="sessions">
+    <section class="section" id="services">
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Ways to spend time together</span>
@@ -430,6 +464,24 @@
             <h3>Tarot reading</h3>
             <p>Use the cards as a prompt for perspective and self-reflection, with an open conversation and no predictions.</p>
             <button class="text-link" type="button" data-book="Tarot reflection">Ask about a tarot reading ↗</button>
+          </article>
+          <article class="offer">
+            <span class="offer-number">04 / SOUND</span>
+            <h3>Tibetan Sound Immersion</h3>
+            <p>A sound-based relaxation session using bowls and other acoustic instruments.</p>
+            <button class="text-link" type="button" data-book="Tibetan Sound Immersion">Ask about sound immersion ↗</button>
+          </article>
+          <article class="offer">
+            <span class="offer-number">05 / ENERGY</span>
+            <h3>Chakra Alignment & Aura</h3>
+            <p>A reflective session using traditional chakra concepts and guided attention.</p>
+            <button class="text-link" type="button" data-book="Chakra Alignment & Aura">Ask about a session ↗</button>
+          </article>
+          <article class="offer">
+            <span class="offer-number">06 / SOMATIC</span>
+            <h3>Somatic Nervous Reset</h3>
+            <p>Gentle breath and body-awareness practices adapted to your comfort.</p>
+            <button class="text-link" type="button" data-book="Somatic Nervous Reset">Ask about a session ↗</button>
           </article>
         </div>
       </div>
@@ -457,7 +509,17 @@
           <h2 class="serif">There’s space for you here.</h2>
           <p>Share what you’re looking for. We’ll be in touch to talk through next steps.</p>
         </div>
-        <button class="button" type="button" data-book="A first conversation">Send a session request <span aria-hidden="true">↗</span></button>
+        <button class="button" type="button" data-book="General Ki Balancing">Send a session request <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+    <section class="section section-soft">
+      <div class="wrap">
+        <div class="affirmation panel">
+          <span class="eyebrow">A moment of reflection</span>
+          <blockquote id="affirmation-quote">“Just for today, do not be angry. Do not worry and be filled with gratitude. Be kind to others.”</blockquote>
+          <cite id="affirmation-author">Mikao Usui · Founder of Usui Reiki Ryoho</cite><br>
+          <button class="button button-outline" id="new-affirmation" type="button">New Ki affirmation</button>
+        </div>
       </div>
     </section>
   </main>
@@ -465,7 +527,7 @@
   <footer>
     <div class="wrap footer-row">
       <span>© <span id="year"></span> Ki Healing Hub</span>
-      <div class="footer-links"><a href="#breathwork">Breath practice</a><a href="#soundscapes">Sound studio</a><a href="#yoga">Yoga</a><a href="#meditation">Meditation</a><a href="#sessions">Sessions</a><a href="#about">Our approach</a></div>
+      <div class="footer-links"><a href="#breathwork">Breath practice</a><a href="#soundscapes">Sound studio</a><a href="#yoga">Yoga</a><a href="#meditation">Meditation</a><a href="#services">Ki Modalities</a><a href="#about">Our approach</a></div>
       <span>Move gently. Begin again.</span>
     </div>
   </footer>
@@ -479,7 +541,9 @@
       <form id="booking-form" action="https://formspree.io/f/mwllgqoq" method="POST">
         <input type="hidden" name="_subject" value="New Ki Healing Hub session request">
         <div class="form-grid">
-          <div class="field full"><label for="service">I’m interested in</label><select id="service" name="service"><option>A first conversation</option><option>Mindful yoga</option><option>Ki Yoga Class</option><option>Guided Meditation</option><option>Reiki-inspired care</option><option>Tibetan Sound Immersion</option><option>Chakra Alignment & Aura</option><option>Somatic Nervous Reset</option><option>Tarot reflection</option></select></div>
+          <div class="field full"><label for="service">I’m interested in</label><select id="service" name="service"><option>General Ki Balancing</option><option>Usui Reiki & Ki Balancing</option><option>Mindful yoga</option><option>Ki Yoga Class</option><option>Guided Meditation</option><option>Reiki-inspired care</option><option>Tibetan Sound Immersion</option><option>Chakra Alignment & Aura</option><option>Somatic Nervous Reset</option><option>Tarot reflection</option></select></div>
+          <div class="field"><label for="booking-date">Preferred date</label><input id="booking-date" name="date" type="date" required></div>
+          <div class="field"><label for="booking-time">Time window</label><select id="booking-time" name="time"><option>Morning (09:00 AM)</option><option>Mid-day (01:00 PM)</option><option>Sunset (05:30 PM)</option><option>Twilight (07:00 PM)</option></select></div>
           <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
           <div class="field full"><label for="message">Anything you’d like us to know <span style="font-weight:400;text-transform:none">(optional)</span></label><textarea id="message" name="message" placeholder="Questions, access needs, or a good time to reach you"></textarea></div>
@@ -497,7 +561,7 @@
     const patterns = {
       steady: { description: 'A simple, even rhythm: breathe in for five seconds, then out for five. Keep your breath easy and unforced.', phases: [{ name: 'Breathe in', seconds: 5, scale: 1.16 }, { name: 'Breathe out', seconds: 5, scale: 0.94 }] },
       box: { description: 'A balanced four-part rhythm. If a pause feels uncomfortable, skip it and breathe normally.', phases: [{ name: 'Breathe in', seconds: 4, scale: 1.16 }, { name: 'Pause', seconds: 4, scale: 1.16 }, { name: 'Breathe out', seconds: 4, scale: 0.94 }, { name: 'Pause', seconds: 4, scale: 0.94 }] },
-      ease: { description: 'Breathe in gently for four seconds and out for six. Let the exhale be soft; there is no need to take a deep breath.', phases: [{ name: 'Breathe in', seconds: 4, scale: 1.12 }, { name: 'Breathe out', seconds: 6, scale: 0.94 }] }
+      ease: { description: 'Deep Ki Calm: breathe in gently for four seconds, pause for seven, then breathe out for eight. Skip the pause or return to natural breathing if it feels uncomfortable.', phases: [{ name: 'Inhale', seconds: 4, scale: 1.14 }, { name: 'Hold gently', seconds: 7, scale: 1.14 }, { name: 'Exhale slowly', seconds: 8, scale: 0.94 }] }
     };
     let activePattern = 'steady';
     let phaseIndex = 0;
@@ -762,6 +826,19 @@
       renderMeditationTimer();
     });
 
+    const affirmations = [
+      { quote: 'Just for today, do not be angry. Do not worry and be filled with gratitude. Be kind to others.', author: 'Mikao Usui · Founder of Usui Reiki Ryoho' },
+      { quote: 'The breath is the bridge which connects life to consciousness, and your body to your thoughts.', author: 'Thích Nhất Hạnh' },
+      { quote: 'Quiet the mind, and the soul will speak. Center your attention and trust the unfolding.', author: 'Jaya Shati' },
+      { quote: 'In the depth of winter, I finally learned that within me there lay an invincible summer.', author: 'Albert Camus' }
+    ];
+    let affirmationIndex = 0;
+    document.getElementById('new-affirmation').addEventListener('click', () => {
+      affirmationIndex = (affirmationIndex + 1) % affirmations.length;
+      document.getElementById('affirmation-quote').textContent = `“${affirmations[affirmationIndex].quote}”`;
+      document.getElementById('affirmation-author').textContent = affirmations[affirmationIndex].author;
+    });
+
     const modal = document.getElementById('booking-modal');
     const form = document.getElementById('booking-form');
     const serviceSelect = document.getElementById('service');
@@ -773,9 +850,12 @@
     let previousFocus = null;
     function openModal(service) {
       previousFocus = document.activeElement;
-      serviceSelect.value = [...serviceSelect.options].some((option) => option.value === service) ? service : 'A first conversation';
+      serviceSelect.value = [...serviceSelect.options].some((option) => option.value === service) ? service : 'General Ki Balancing';
       confirmation.hidden = true;
       confirmation.classList.remove('is-error');
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('booking-date').value = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
       document.getElementById('modal-close').focus();
