@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5ef">
-  <meta name="description" content="A quiet space for mindful movement, Reiki-inspired sessions, and tarot reflection at Ki Healing Hub.">
-  <title>Ki Healing Hub | Make room to feel well</title>
+  <meta name="description" content="Explore mindful yoga, Reiki, synthesized soundscapes, meditation, and tarot reflection at Ki Healing Hub.">
+  <title>Ki Healing Hub | Vital Energy, Reiki & Mindful Meditation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
@@ -110,6 +110,43 @@
     .text-link { margin-top: auto; padding: 0 0 4px; border: 0; border-bottom: 1px solid #9aab9a; background: transparent; color: var(--leaf-dark); font-size: 11px; font-weight: 700; cursor: pointer; }
     .text-link:hover { color: var(--clay); border-color: var(--clay); }
 
+    .sound-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 18px; }
+    .track-list { display: grid; align-content: center; gap: 8px; }
+    .track { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px; border: 1px solid transparent; border-radius: 8px; background: transparent; text-align: left; cursor: pointer; }
+    .track:hover { background: var(--leaf-pale); }
+    .track[aria-pressed="true"] { border-color: #cbd6c8; background: var(--white); }
+    .track strong { display: block; font-size: 11px; font-weight: 600; }
+    .track small { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; }
+    .audio-console { min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: 10px; background: var(--leaf-dark); color: white; }
+    .audio-console h3 { margin: 6px 0; font-family: var(--serif); font-size: 26px; font-weight: 400; }
+    .audio-status { color: #d7dfd4; font-size: 10px; }
+    .audio-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 20px; }
+    .audio-play { width: 48px; height: 48px; border: 0; border-radius: 50%; background: #dfc478; color: var(--leaf-dark); cursor: pointer; }
+    .volume-control { display: flex; align-items: center; gap: 8px; color: #e1e6df; font-size: 10px; }
+    .volume-control input { width: 100px; accent-color: #dfc478; }
+    .class-grid, .meditation-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    .class-card, .meditation-card { padding: 22px; }
+    .class-card h3, .meditation-card h3 { margin: 10px 0 6px; font-family: var(--serif); font-size: 23px; font-weight: 400; }
+    .class-card p, .meditation-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .schedule-layout { display: grid; grid-template-columns: 1.4fr .8fr; gap: 14px; margin-top: 18px; }
+    .schedule, .class-pricing { padding: 23px; }
+    .schedule h3, .class-pricing h3 { margin: 0 0 13px; font-family: var(--serif); font-size: 24px; font-weight: 400; }
+    .schedule-row { display: grid; grid-template-columns: 82px 1fr auto; gap: 8px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 10px; }
+    .schedule-row span:last-child { color: var(--muted); }
+    .class-pricing { border-radius: 10px; background: var(--leaf-dark); color: white; }
+    .price-row { display: flex; justify-content: space-between; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.18); font-size: 10px; }
+    .price-row strong { font-family: var(--serif); font-size: 19px; font-weight: 400; }
+    .class-pricing p { color: #d6dfd5; font-size: 9px; line-height: 1.6; }
+    .meditation-layout { display: grid; grid-template-columns: 1.3fr .8fr; gap: 15px; align-items: start; }
+    .timer { position: sticky; top: 92px; padding: 22px; text-align: center; }
+    .timer h3 { margin: 6px 0; font-family: var(--serif); font-size: 25px; font-weight: 400; }
+    .timer p { color: var(--muted); font-size: 10px; line-height: 1.6; }
+    .duration-row, .timer-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .duration { min-height: 30px; padding: 0 10px; border: 1px solid var(--line); border-radius: 999px; background: transparent; font-size: 9px; cursor: pointer; }
+    .duration[aria-pressed="true"] { border-color: var(--leaf); background: var(--leaf); color: white; }
+    .timer-display { width: 165px; aspect-ratio: 1; display: grid; place-items: center; margin: 20px auto; border: 6px solid var(--leaf-pale); border-top-color: var(--gold); border-radius: 50%; font-family: var(--serif); font-size: 42px; font-variant-numeric: tabular-nums; }
+    .timer-status { color: var(--muted); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
     .about-image { height: 380px; overflow: hidden; background: var(--clay-pale); }
     .about-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -211,7 +248,10 @@
         <span><span class="brand-name">Ki Healing Hub</span><span class="brand-note">Mindful movement · reflection</span></span>
       </a>
       <nav class="nav-links" id="site-navigation" aria-label="Main navigation">
-        <a href="#practice">Breath practice</a>
+        <a href="#breathwork">Breath Sanctuary</a>
+        <a href="#soundscapes">Harmonics</a>
+        <a href="#yoga">Yoga</a>
+        <a href="#meditation">Meditation</a>
         <a href="#sessions">Sessions</a>
         <a href="#about">Our approach</a>
       </nav>
@@ -229,7 +269,7 @@
             <h1 class="serif">Make room to <em>feel well.</em></h1>
             <p>Find a little more space in your day through mindful movement, Reiki-inspired care, and thoughtful tarot reflection. Come as you are; begin where you are.</p>
             <div class="hero-actions">
-              <a class="button" href="#practice">Take a breath <span aria-hidden="true">↗</span></a>
+              <a class="button" href="#breathwork">Take a breath <span aria-hidden="true">↗</span></a>
               <a class="button button-outline" href="#sessions">Explore sessions</a>
             </div>
             <div class="hero-caption"><span class="caption-line"></span> Grounded practices for everyday life</div>
@@ -247,7 +287,7 @@
       </div>
     </section>
 
-    <section class="section section-soft" id="practice">
+    <section class="section section-soft" id="breathwork">
       <div class="wrap breath-layout">
         <div class="breath-panel" aria-label="Breathing pace guide">
           <div class="mode-row" role="group" aria-label="Breathing pattern">
@@ -274,6 +314,93 @@
           </div>
           <p class="breath-description" id="pattern-description">A simple, even rhythm: breathe in for five seconds, then out for five. Keep your breath easy and unforced.</p>
           <p class="small-note">This pacing guide is for relaxation, not medical care. Skip breath holds if they feel uncomfortable, and return to normal breathing whenever you need.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="soundscapes">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Acoustic Ki Entrainment</span>
+          <h2 class="serif">Live Synthesized Harmonics</h2>
+          <p>Choose a gentle synthesized tone, ocean-like sound, or stereo binaural tone. Keep the volume comfortable and pause whenever you like.</p>
+        </div>
+        <div class="sound-layout">
+          <div class="track-list" role="group" aria-label="Select a soundscape">
+            <button class="track" type="button" data-track="bowl" aria-pressed="true"><span><strong>432 Hz Singing Bowl Drone</strong><small>Warm layered tones</small></span><span aria-hidden="true">♫</span></button>
+            <button class="track" type="button" data-track="ocean" aria-pressed="false"><span><strong>Ocean Prana Waves</strong><small>Soft filtered noise</small></span><span aria-hidden="true">≈</span></button>
+            <button class="track" type="button" data-track="binaural" aria-pressed="false"><span><strong>Theta Binaural (6 Hz)</strong><small>Headphones recommended</small></span><span aria-hidden="true">◉</span></button>
+          </div>
+          <div class="audio-console">
+            <div><span class="eyebrow" style="color:#e7d6a9">Ambient sound studio</span><h3 id="track-title">432 Hz Singing Bowl Drone</h3><span class="audio-status" id="audio-status" aria-live="polite">Paused · Ready when you are</span></div>
+            <div class="audio-controls">
+              <button class="audio-play" id="audio-toggle" type="button" aria-label="Play soundscape">▶</button>
+              <label class="volume-control" for="sound-volume">Volume <input id="sound-volume" type="range" min="0" max="0.35" step="0.01" value="0.12"><span id="volume-label">34%</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="yoga">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Movement as Meditation</span>
+          <h2 class="serif">Ki Yoga Studio</h2>
+          <p>Mindful, breath-led classes from grounding Hatha to restorative practice. Choose a pace that feels supportive for you.</p>
+        </div>
+        <div class="class-grid">
+          <article class="class-card panel"><span class="eyebrow">All levels</span><h3>Grounding Hatha</h3><p>Slow, steady postures with time to notice breath and alignment.</p></article>
+          <article class="class-card panel"><span class="eyebrow">Beginner · Intermediate</span><h3>Vinyasa Ki Flow</h3><p>Gentle sequences linking movement and breath, with options to pause.</p></article>
+          <article class="class-card panel"><span class="eyebrow">All levels</span><h3>Yin & Restorative</h3><p>Supported poses and longer holds for a quiet, unhurried practice.</p></article>
+          <article class="class-card panel"><span class="eyebrow">All levels</span><h3>Yoga Nidra</h3><p>A guided lying-down meditation for rest and relaxed awareness.</p></article>
+        </div>
+        <div class="schedule-layout">
+          <div class="schedule panel">
+            <h3>Weekly Class Schedule</h3>
+            <div class="schedule-row"><strong>Monday</strong><span>7:00 AM · Grounding Hatha</span><span>60 min</span></div>
+            <div class="schedule-row"><strong>Tuesday</strong><span>6:30 PM · Vinyasa Ki Flow</span><span>60 min</span></div>
+            <div class="schedule-row"><strong>Wednesday</strong><span>7:30 PM · Yin & Restorative</span><span>75 min</span></div>
+            <div class="schedule-row"><strong>Thursday</strong><span>7:00 AM · Vinyasa Ki Flow</span><span>60 min</span></div>
+            <div class="schedule-row"><strong>Friday</strong><span>8:00 PM · Yoga Nidra</span><span>45 min</span></div>
+            <div class="schedule-row"><strong>Saturday</strong><span>9:00 AM Hatha · 5:00 PM Yin</span><span>60 / 75 min</span></div>
+            <div class="schedule-row"><strong>Sunday</strong><span>10:00 AM · Community Flow & Meditation</span><span>90 min</span></div>
+          </div>
+          <aside class="class-pricing">
+            <div><h3>Join a Class</h3><div class="price-row"><span>Drop-in class</span><strong>$25</strong></div><div class="price-row"><span>10-class pass</span><strong>$210</strong></div><div class="price-row"><span>Private 1:1</span><strong>$95</strong></div><p>Times and prices are sample listings; please confirm availability when you request a class.</p></div>
+            <button class="button" type="button" data-book="Ki Yoga Class">Reserve a yoga class</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="meditation">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Stillness Practice</span>
+          <h2 class="serif">Mindful Meditation</h2>
+          <p>Try a short home practice or join a guided circle. Take breaks as needed and adapt each practice to your comfort.</p>
+        </div>
+        <div class="meditation-layout">
+          <div class="meditation-grid">
+            <article class="meditation-card panel"><h3>Zazen Sitting</h3><p>Seated attention to posture and breath, allowing thoughts to come and go.</p></article>
+            <article class="meditation-card panel"><h3>Loving-Kindness</h3><p>A guided Metta practice with phrases of care for yourself and others.</p></article>
+            <article class="meditation-card panel"><h3>Body Scan</h3><p>A gradual practice of noticing physical sensations from head to toe.</p></article>
+            <article class="meditation-card panel"><h3>Walking Meditation</h3><p>Slow, mindful steps coordinated with a comfortable breathing rhythm.</p></article>
+            <article class="meditation-card panel" style="grid-column:1/-1"><span class="eyebrow">Groups & courses</span><h3>Meditation Circles & Courses</h3><p>Weekly circle: Wednesdays at 6:00 PM · 45 min · $15. Foundations of Mindfulness: four weeks · $120. Please confirm dates when booking.</p><button class="button" type="button" data-book="Guided Meditation">Reserve a spot</button></article>
+          </div>
+          <div class="timer panel">
+            <span class="eyebrow">Practice at home</span><h3>Meditation Timer</h3><p>A soft synthesized bell sounds at the beginning and end. Keep the volume comfortable.</p>
+            <div class="duration-row" role="group" aria-label="Meditation duration">
+              <button class="duration" type="button" data-minutes="5" aria-pressed="false">5 min</button>
+              <button class="duration" type="button" data-minutes="10" aria-pressed="true">10 min</button>
+              <button class="duration" type="button" data-minutes="15" aria-pressed="false">15 min</button>
+              <button class="duration" type="button" data-minutes="20" aria-pressed="false">20 min</button>
+            </div>
+            <div class="timer-display" id="timer-display" aria-live="polite">10:00</div>
+            <div class="timer-status" id="timer-status">Ready</div>
+            <div class="timer-actions"><button class="button" id="timer-toggle" type="button">Begin</button><button class="button button-outline" id="timer-reset" type="button">Reset</button></div>
+          </div>
         </div>
       </div>
     </section>
@@ -338,7 +465,7 @@
   <footer>
     <div class="wrap footer-row">
       <span>© <span id="year"></span> Ki Healing Hub</span>
-      <div class="footer-links"><a href="#practice">Breath practice</a><a href="#sessions">Sessions</a><a href="#about">Our approach</a></div>
+      <div class="footer-links"><a href="#breathwork">Breath practice</a><a href="#soundscapes">Sound studio</a><a href="#yoga">Yoga</a><a href="#meditation">Meditation</a><a href="#sessions">Sessions</a><a href="#about">Our approach</a></div>
       <span>Move gently. Begin again.</span>
     </div>
   </footer>
@@ -352,7 +479,7 @@
       <form id="booking-form" action="https://formspree.io/f/mwllgqoq" method="POST">
         <input type="hidden" name="_subject" value="New Ki Healing Hub session request">
         <div class="form-grid">
-          <div class="field full"><label for="service">I’m interested in</label><select id="service" name="service"><option>A first conversation</option><option>Mindful yoga</option><option>Reiki-inspired care</option><option>Tarot reflection</option></select></div>
+          <div class="field full"><label for="service">I’m interested in</label><select id="service" name="service"><option>A first conversation</option><option>Mindful yoga</option><option>Ki Yoga Class</option><option>Guided Meditation</option><option>Reiki-inspired care</option><option>Tibetan Sound Immersion</option><option>Chakra Alignment & Aura</option><option>Somatic Nervous Reset</option><option>Tarot reflection</option></select></div>
           <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
           <div class="field full"><label for="message">Anything you’d like us to know <span style="font-weight:400;text-transform:none">(optional)</span></label><textarea id="message" name="message" placeholder="Questions, access needs, or a good time to reach you"></textarea></div>
@@ -436,6 +563,205 @@
       });
     });
 
+    const soundTitles = { bowl: '432 Hz Singing Bowl Drone', ocean: 'Ocean Prana Waves', binaural: 'Theta Binaural Waves (6 Hz)' };
+    let audioContext = null;
+    let masterGain = null;
+    let soundSources = [];
+    let soundNodes = [];
+    let currentTrack = 'bowl';
+    let audioPlaying = false;
+    function getAudioContext() {
+      const AudioContextType = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextType) throw new Error('Web Audio is not supported in this browser.');
+      if (!audioContext) audioContext = new AudioContextType();
+      if (audioContext.state === 'suspended') audioContext.resume();
+      return audioContext;
+    }
+    function getMasterGain(context) {
+      if (!masterGain) {
+        masterGain = context.createGain();
+        masterGain.gain.value = Number(document.getElementById('sound-volume').value);
+        masterGain.connect(context.destination);
+      }
+      return masterGain;
+    }
+    function stopSound() {
+      soundSources.forEach((source) => { try { source.stop(); } catch {} });
+      soundNodes.forEach((node) => { try { node.disconnect(); } catch {} });
+      soundSources = [];
+      soundNodes = [];
+      audioPlaying = false;
+    }
+    function playBowl(context, output) {
+      [432, 864, 1296].forEach((frequency, index) => {
+        const oscillator = context.createOscillator();
+        const partialGain = context.createGain();
+        oscillator.type = 'sine';
+        oscillator.frequency.value = frequency;
+        partialGain.gain.value = [0.22, 0.07, 0.025][index];
+        oscillator.connect(partialGain);
+        partialGain.connect(output);
+        oscillator.start();
+        soundSources.push(oscillator);
+        soundNodes.push(oscillator, partialGain);
+      });
+    }
+    function playOcean(context, output) {
+      const buffer = context.createBuffer(1, context.sampleRate * 3, context.sampleRate);
+      const samples = buffer.getChannelData(0);
+      for (let index = 0; index < samples.length; index += 1) samples[index] = (Math.random() * 2 - 1) * 0.2;
+      const source = context.createBufferSource();
+      const filter = context.createBiquadFilter();
+      const lfo = context.createOscillator();
+      const lfoGain = context.createGain();
+      source.buffer = buffer;
+      source.loop = true;
+      filter.type = 'lowpass';
+      filter.frequency.value = 420;
+      lfo.frequency.value = 0.12;
+      lfoGain.gain.value = 260;
+      lfo.connect(lfoGain);
+      lfoGain.connect(filter.frequency);
+      source.connect(filter);
+      filter.connect(output);
+      source.start();
+      lfo.start();
+      soundSources.push(source, lfo);
+      soundNodes.push(source, filter, lfo, lfoGain);
+    }
+    function playBinaural(context, output) {
+      const merger = context.createChannelMerger(2);
+      const left = context.createOscillator();
+      const right = context.createOscillator();
+      const leftGain = context.createGain();
+      const rightGain = context.createGain();
+      left.frequency.value = 200;
+      right.frequency.value = 206;
+      leftGain.gain.value = 0.2;
+      rightGain.gain.value = 0.2;
+      left.connect(leftGain);
+      right.connect(rightGain);
+      leftGain.connect(merger, 0, 0);
+      rightGain.connect(merger, 0, 1);
+      merger.connect(output);
+      left.start();
+      right.start();
+      soundSources.push(left, right);
+      soundNodes.push(merger, left, right, leftGain, rightGain);
+    }
+    function updateSoundControls() {
+      const button = document.getElementById('audio-toggle');
+      button.textContent = audioPlaying ? 'Ⅱ' : '▶';
+      button.setAttribute('aria-label', audioPlaying ? 'Pause soundscape' : 'Play soundscape');
+      document.getElementById('audio-status').textContent = audioPlaying ? 'Soundscape playing' : 'Paused · Ready when you are';
+      const quickButton = document.getElementById('quick-sound');
+      quickButton.setAttribute('aria-pressed', String(audioPlaying));
+      quickButton.textContent = audioPlaying ? 'Sound: On' : 'Sound: Off';
+    }
+    function startSound() {
+      try {
+        const context = getAudioContext();
+        const output = getMasterGain(context);
+        stopSound();
+        if (currentTrack === 'bowl') playBowl(context, output);
+        if (currentTrack === 'ocean') playOcean(context, output);
+        if (currentTrack === 'binaural') playBinaural(context, output);
+        audioPlaying = true;
+      } catch {
+        document.getElementById('audio-status').textContent = 'Audio is unavailable in this browser.';
+      }
+      updateSoundControls();
+    }
+    function toggleSound() {
+      if (audioPlaying) stopSound();
+      else { startSound(); return; }
+      updateSoundControls();
+    }
+    document.getElementById('audio-toggle').addEventListener('click', toggleSound);
+    document.getElementById('quick-sound').addEventListener('click', toggleSound);
+    document.querySelectorAll('[data-track]').forEach((button) => button.addEventListener('click', () => {
+      currentTrack = button.dataset.track;
+      document.getElementById('track-title').textContent = soundTitles[currentTrack];
+      document.querySelectorAll('[data-track]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      if (audioPlaying) startSound();
+    }));
+    document.getElementById('sound-volume').addEventListener('input', (event) => {
+      const volume = Number(event.target.value);
+      if (masterGain && audioContext) masterGain.gain.setTargetAtTime(volume, audioContext.currentTime, 0.03);
+      document.getElementById('volume-label').textContent = `${Math.round(volume / 0.35 * 100)}%`;
+    });
+
+    let meditationDuration = 600;
+    let meditationRemaining = meditationDuration;
+    let meditationInterval = null;
+    function renderMeditationTimer() {
+      const minutes = Math.floor(meditationRemaining / 60);
+      const seconds = meditationRemaining % 60;
+      document.getElementById('timer-display').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+    function playMeditationBell() {
+      try {
+        const context = getAudioContext();
+        [528, 1056].forEach((frequency, index) => {
+          const oscillator = context.createOscillator();
+          const gain = context.createGain();
+          oscillator.type = 'sine';
+          oscillator.frequency.value = frequency;
+          gain.gain.setValueAtTime(0.0001, context.currentTime);
+          gain.gain.exponentialRampToValueAtTime(index ? 0.035 : 0.12, context.currentTime + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 2.8);
+          oscillator.connect(gain);
+          gain.connect(context.destination);
+          oscillator.start();
+          oscillator.stop(context.currentTime + 2.9);
+        });
+      } catch {}
+    }
+    document.querySelectorAll('[data-minutes]').forEach((button) => button.addEventListener('click', () => {
+      clearInterval(meditationInterval);
+      meditationInterval = null;
+      meditationDuration = Number(button.dataset.minutes) * 60;
+      meditationRemaining = meditationDuration;
+      document.querySelectorAll('[data-minutes]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      document.getElementById('timer-status').textContent = 'Ready';
+      document.getElementById('timer-toggle').textContent = 'Begin';
+      renderMeditationTimer();
+    }));
+    document.getElementById('timer-toggle').addEventListener('click', () => {
+      const status = document.getElementById('timer-status');
+      const button = document.getElementById('timer-toggle');
+      if (meditationInterval) {
+        clearInterval(meditationInterval);
+        meditationInterval = null;
+        status.textContent = 'Paused';
+        button.textContent = 'Resume';
+        return;
+      }
+      if (meditationRemaining <= 0) meditationRemaining = meditationDuration;
+      if (meditationRemaining === meditationDuration) playMeditationBell();
+      status.textContent = 'Breathe & be still';
+      button.textContent = 'Pause';
+      meditationInterval = setInterval(() => {
+        meditationRemaining -= 1;
+        renderMeditationTimer();
+        if (meditationRemaining <= 0) {
+          clearInterval(meditationInterval);
+          meditationInterval = null;
+          playMeditationBell();
+          status.textContent = 'Session complete';
+          button.textContent = 'Begin again';
+        }
+      }, 1000);
+    });
+    document.getElementById('timer-reset').addEventListener('click', () => {
+      clearInterval(meditationInterval);
+      meditationInterval = null;
+      meditationRemaining = meditationDuration;
+      document.getElementById('timer-status').textContent = 'Ready';
+      document.getElementById('timer-toggle').textContent = 'Begin';
+      renderMeditationTimer();
+    });
+
     const modal = document.getElementById('booking-modal');
     const form = document.getElementById('booking-form');
     const serviceSelect = document.getElementById('service');
@@ -510,6 +836,8 @@
       navigation.classList.remove('is-open');
     }));
     document.getElementById('year').textContent = new Date().getFullYear();
+    renderMeditationTimer();
+    updateSoundControls();
   </script>
 </body>
 </html>
